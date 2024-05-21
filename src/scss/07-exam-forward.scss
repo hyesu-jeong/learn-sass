@@ -1,0 +1,9 @@
+// @use "./modules/modules-01" as m-1;
+// @use "./modules/modules-02" as m-2;
+// 위에 처럼 파일 하나하나를 가져오지 않고 폴더를 통채로 가져오는 forward 방식
+@use "./modules" as mod;
+
+.box {
+  padding: mod.$m1-spacing-1;
+  @include mod.m2-size(100px);
+}
