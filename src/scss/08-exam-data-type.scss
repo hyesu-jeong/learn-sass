@@ -1,0 +1,75 @@
+@use "sass:meta";
+@use "sass:math";
+
+// null
+$nothing: null;
+
+@debug meta.type-of($nothing); // Debug: null
+
+// number
+$num: 101;
+$unit: 180px;
+
+@debug meta.type-of($num); // Debug: number
+@debug meta.type-of($unit); // Debug: number
+
+// string
+$pretendard: Pretendard;
+$spoqa: "Spoqa Han Sans Neo";
+
+@debug meta.type-of($pretendard); // Debug: string
+@debug meta.type-of($spoqa); // Debug: string
+
+// color
+$hex: #f94e07;
+$keyword: purple;
+$color-function: hsl(18, 95%, 50%);
+
+@debug meta.type-of($hex); // Debug: color
+@debug meta.type-of($keyword); // Debug: color
+@debug meta.type-of($color-function); // Debug: color
+
+// bool
+$yes: true;
+$no: false;
+
+@debug meta.type-of($yes); // Debug: bool
+@debug meta.type-of($no); // Debug: bool
+
+// list
+$units: 20px 10px 0; //공백으로 구분
+$font-families: Pretendard, Helvetica, sans-serif; //,(콤마)로 구분
+$square-bracket: [Verdana sans-serif]; //[](대괄호)로 구분
+
+@debug meta.type-of($units); // Debug: list
+@debug meta.type-of($font-families); // Debug: list
+@debug meta.type-of($square-bracket); // Debug: list
+
+// map
+$theme: (
+  light: (
+    forground: #121916,
+    background: #e7e6e7,
+  ),
+  dark: (
+    background: #121916,
+    forground: #e7e6e7,
+  ),
+);
+
+@debug meta.type-of($theme); // Debug: map
+
+// function
+@function getUnit($value) {
+  @return math.unit($value);
+}
+
+@debug getUnit(10); // ''
+@debug getUnit(20px); // 'px'
+@debug getUnit(30%); // '%'
+@debug meta.type-of(getUnit(10)); // Debug: function
+
+// calculation
+@debug calc(400px + 10%); // calc(400px + 10%)
+@debug calc(400px / 2); // 200px
+@debug min(100px, calc(1rem + 10%)); // min(100px, 1rem + 10%)

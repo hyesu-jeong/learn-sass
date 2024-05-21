@@ -1,0 +1,35 @@
+@use "sass:math";
+
+// 연산자
+$operator1: 9s + 21s; // 30s
+$operator2: 1cm - 11cm; // -10cm
+$operator3-1: 9px * 2px; // 18px*px 🚨
+$operator3-2: math.div(8px, 1px); //
+$operator4: 101px % 8px; // 5px
+// 나누기 함수 CSS에서 '/' 기호는 구분 기호로 사용되므로  math.div() 함수를 사용해야 한다.
+$operator5-2: math.div(100px, 20px); // 5px
+
+.box1 {
+  font-size: $operator5-2;
+}
+
+// 단위 추가
+box2 {
+  // numbering 방식
+  padding: $operator3-2 * 1px;
+  // '#{ }' 인터폴레이션 방식(보간법) -> 해당 방식을 권장 한다.
+  margin: #{$operator3-2}px;
+}
+
+// 숫자 연산자
+@debug 9s + 21s; // 30s
+@debug 1cm - 11cm; // -10cm
+@debug 101px % 8px; // 5px
+@debug 9px * 2px; // 18px*px 🚨 단위를 반복해서 넣으면 이렇게 됨
+@debug calc(9px * 2); // 18px 이렇게 calc를 사용해야 한다.
+
+// 나눗셈
+@debug math.div(90, 3); // 30
+
+// 리스트 비교
+@debug (5px 7px 10px) != (5px, 7px, 10px);
