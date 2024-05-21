@@ -1,0 +1,81 @@
+@use "sass:color";
+
+// @else if
+@mixin size($width, $height: null, $rounded: null) {
+  width: $width;
+  @if $height != null {
+    height: $height;
+  } @else {
+    height: $width;
+  }
+
+  @if $rounded == sm {
+    border-radius: 2px;
+  } @else if $rounded == md {
+    border-radius: 4px;
+  } @else if $rounded == lg {
+    border-radius: 6px;
+  } @else if $rounded == xl {
+    border-radius: 8px;
+  } @else {
+    border-radius: $rounded;
+  }
+}
+
+// if() 함수
+@mixin ghost($color, $border-color: null) {
+  color: $color;
+  background: transparent;
+  border: 1px solid if($border-color == null, $color, $border-color);
+}
+
+@mixin ghost($color, $border-color: $color) {
+  color: $color;
+  background: transparent;
+  border: 1px solid $border-color;
+}
+
+box {
+  @include size(100px, 50px, xl);
+}
+
+// 반복 처리 - @while : 조건이 참인 동안 블록을 반복합니다.
+@mixin font($font-size: 16, $until-font-size: 24) {
+  @while $font-size <= $until-font-size {
+    .font-size-#{$font-size} {
+      font-size: #{$font-size}px;
+      line-height: #{$font-size + 2}px;
+      letter-spacing: 1px;
+    }
+
+    $font-size: $font-size + 2;
+  }
+}
+
+@include font(18, 20);
+
+// 반복 처리 - @for : 특정 숫자에서 목표로 하는 숫자까지 단계를 증감하여 반복 제어하는 기능을 제공
+@mixin colorScale($color, $selector) {
+  @for $i from 1 through 5 {
+    #{$selector}:nth-child(#{$i}) {
+      background-color: color.scale($color, $lightness: $i * 10%);
+    }
+  }
+}
+
+.box-for {
+  @include colorScale(#000000, ".item");
+}
+
+// 반복 처리 - @each : 리스트 또는 맵 데이터를 순환해 반복 처리
+// @each 변수 in 표현식(리스트 또는 맵) {
+//   // 반복할 코드 블록
+// }
+
+$icons: search more arrow plus dot-circle;
+
+@each $icon in $icons {
+  .icon-#{$icon} {
+    background: url(/images/icons/#{$icon}.svg) no-repeat 0 0;
+  }
+}
