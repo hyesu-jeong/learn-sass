@@ -1,0 +1,15 @@
+.menu {
+  background: yellow;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+
+  &__list {
+    border: 1px solid red;
+  }
+
+  // '@at-root'규칙: 중첩 벗어나기(네이밍 규칙이 다른 경우 사용)
+  @at-root .navigation-item {
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,21 @@
+// 플레이스홀더 선택자
+%button {
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  padding: 12px 8px;
+}
+
+.button {
+  &--red {
+    @extend %button;
+    background-color: red;
+  }
+  &--blue {
+    @extend %button;
+    background-color: blue;
+  }
+  &--green {
+    @extend %button;
+    background-color: green;
+  }
+}

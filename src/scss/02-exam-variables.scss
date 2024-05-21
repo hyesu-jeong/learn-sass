@@ -1,0 +1,64 @@
+:root {
+  --primary: #00ff00;
+}
+
+$base-color: #bf2243;
+$border-color: rgba($base-color, 0.7);
+
+// scss에서는 -(하이픈)과 _(언더바)를 동일하게 인식한다.
+.alert {
+  border: 1px solid $border_color; // ←
+}
+body {
+  // background-color: var(--primary);
+}
+
+// 명령형인 Sass 변수는 변수를 사용한 후 그 값을 변경해도 이전에 사용된 값은 그 값을 유지합니다.
+$color: #bf2243;
+.rule-1 {
+  color: $color;
+}
+
+$color: #0e0948;
+.rule-2 {
+  color: $color;
+}
+
+// 선언형인 CSS 글로벌 변수는 값을 변경하면 이전, 이후 모드 영향을 받습니다.
+:root {
+  --color: #bf2243;
+}
+
+.box1 {
+  color: var(--color);
+}
+
+:root {
+  --color: #0e0948;
+}
+
+.box2 {
+  color: var(--color);
+}
+
+// !default
+$black: #000 !default;
+$border-radius: 0.25rem !default;
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15) !default;
+
+code {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}
+
+// !global
+$variable: "글로벌 변수";
+
+.content {
+  $variable: "글로벌(global) 변수" !global;
+  value: $variable;
+}
+
+.sidebar {
+  value: $variable; // '글로벌(global) 변수'
+}
