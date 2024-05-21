@@ -1,0 +1,52 @@
+@use "sass:math";
+
+// 함수
+@function PI() {
+  @return math.$pi;
+}
+
+$func1: PI(); // 3.1415926536
+
+.box {
+  line-height: $func1;
+  border-radius: PI();
+}
+
+// 인자
+// removeUnit : 단위가 있으면 단위를 탈락시키는 함수
+@function removeUnit($value) {
+  @return math.div($value, ($value * 0 + 1));
+}
+
+@debug removeUnit(192px) + removeUnit(23s); // 192 + 23 = 215
+
+.box2 {
+  font-size: removeUnit(24px);
+}
+
+// 키워드 인자
+// getRandomMinMax : min ~ max 사이 랜덤숫자
+@function getRandomMinMax($min: 0, $max: 10) {
+  @return math.round(math.random() * ($max - $min)) + $min;
+}
+
+@debug getRandomMinMax(22, 48); // 41
+@debug getRandomMinMax($max: 30); // 28
+
+// 나머지 인자
+// sum : 입력한 값이 몇개든 모두 더한 값을 출력
+@function sum($sum: 0, $rest...) {
+  @each $item in $rest {
+    $sum: $sum + $item;
+  }
+  @return $sum;
+}
+
+box3 {
+  margin: sum(10px, 20px, 30px, 40px, 50px);
+}
+
+//인자 전개
+$numbers: 20px, 180px, -3px;
+
+@debug sum($numbers...); // 197px
