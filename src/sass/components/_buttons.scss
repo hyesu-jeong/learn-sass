@@ -1,0 +1,53 @@
+@use "./../utils" as *;
+
+.button-wrapper {
+  // display: flex;
+  // flex-flow: column nowrap;
+  // gap: 16px;
+  // padding: 24px;
+  // 위의 4줄을 mixin으로 단축표기 함
+  @include flexbox(column, $gap: 16px);
+  @include padding(24px);
+}
+
+.button {
+  $default-color: $blue-300;
+  $light-color: $white;
+  $dark-color: $black;
+  $spac-x: $base-spacing;
+  $spac-y: $small-spacing;
+  $small-text: $xx-small-text;
+  $large-text: $x-small-text;
+
+  all: unset; //버튼이 가지고 있는 기본 스타일을 전부 없애는 속성.
+  display: inline-block;
+  padding: $spac-y $spac-x;
+  font-size: rem(14px);
+
+  &--rounded {
+    @include radius("full");
+  }
+
+  &--fill {
+    background-color: $default-color;
+    color: $light-color;
+
+    &.black {
+      background-color: $dark-color;
+    }
+  }
+
+  &--outline {
+    border: 1px solid currentColor;
+    color: $default-color;
+
+    &.black {
+      color: $dark-color;
+    }
+  }
+
+  // 1024px 이상 버튼 글자크기
+  @include mq(lg) {
+    font-size: rem(18px);
+  }
+}
